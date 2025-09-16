@@ -58,6 +58,11 @@ resource "aws_dynamodb_table" "contacts" {
     prevent_destroy = false
   }
 
+  timeouts {
+    create = "1m"
+    update = "1m"
+    delete = "1m"
+  }
 }
 
 resource "aws_api_gateway_rest_api" "api" {
