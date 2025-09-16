@@ -8,10 +8,10 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    lambda     = "http://ip10-0-45-4-d34gvevtq0k1c7corn00-4566.direct.lab-boris.fr"
-    apigateway = "http://ip10-0-45-4-d34gvevtq0k1c7corn00-4566.direct.lab-boris.fr"
-    iam        = "http://ip10-0-45-4-d34gvevtq0k1c7corn00-4566.direct.lab-boris.fr"
-    dynamodb   = "http://ip10-0-45-4-d34gvevtq0k1c7corn00-4566.direct.lab-boris.fr"
+    lambda     = "http://ip10-0-7-4-cvi159ib9qb14bivkpt0-4566.direct.lab-boris.fr"
+    apigateway = "http://ip10-0-7-4-cvi159ib9qb14bivkpt0-4566.direct.lab-boris.fr"
+    iam        = "http://ip10-0-7-4-cvi159ib9qb14bivkpt0-4566.direct.lab-boris.fr"
+    dynamodb   = "http://ip10-0-7-4-cvi159ib9qb14bivkpt0-4566.direct.lab-boris.fr"
   }
 }
 
@@ -44,25 +44,8 @@ resource "aws_lambda_function" "api" {
   }
 }
 
-resource "aws_dynamodb_table" "contacts" {
-  name         = "contacts"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "id"
-
-  attribute {
-    name = "id"
-    type = "S"
-  }
-
-  lifecycle {
-    prevent_destroy = false
-  }
-
-  timeouts {
-    create = "1m"
-    update = "1m"
-    delete = "1m"
-  }
+data "aws_dynamodb_table" "contacts" {
+  name = "contacts"
 }
 
 resource "aws_api_gateway_rest_api" "api" {
