@@ -53,6 +53,11 @@ resource "aws_dynamodb_table" "contacts" {
     name = "id"
     type = "S"
   }
+
+  lifecycle {
+    prevent_destroy = false
+  }
+
 }
 
 resource "aws_api_gateway_rest_api" "api" {
